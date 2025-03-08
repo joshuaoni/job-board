@@ -22,6 +22,7 @@ export async function getJobs({
       location,
       skills,
     };
+    console.log({ requestBody });
 
     // Determine if we're running on the server or client
     const isServer = typeof window === "undefined";
