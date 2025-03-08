@@ -1,8 +1,4 @@
-"use client";
-
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 import SearchBox from "./SearchBox";
 
 export const Header = () => {
@@ -23,60 +19,9 @@ const HeaderContainer = () => {
 };
 
 const LeftHeader = () => {
-  const router = useRouter();
-  const [searchTerm, setSearchTerm] = useState("");
-
-  const handleSearch = () => {
-    const searchParams = new URLSearchParams(window.location.search);
-    if (searchTerm) {
-      searchParams.set("search", searchTerm);
-    } else {
-      searchParams.delete("search");
-    }
-    router.push(`/?${searchParams.toString()}`);
-  };
-
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") {
-      handleSearch();
-    }
-  };
-
   return (
     <div className="app-left-header relative w-[340px] h-[42px]">
       <SearchBox />
-      <SearchIconContainer onSearch={handleSearch} />
-      <input
-        type="text"
-        className="absolute inset-0 bg-transparent pl-12 pr-4 outline-none placeholder-gray-700"
-        placeholder="Search for jobs"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        onKeyPress={handleKeyPress}
-      />
-    </div>
-  );
-};
-
-const SearchIconContainer = ({ onSearch }: { onSearch: () => void }) => {
-  return (
-    <div
-      className="absolute left-4 top-1/2 -translate-y-1/2 w-6 h-6 flex items-center justify-center cursor-pointer"
-      onClick={onSearch}
-    >
-      <SearchIconBox />
-    </div>
-  );
-};
-
-const SearchBox = () => {
-  return <div className="absolute inset-0 bg-[#F0F0F0] rounded-full z-0" />;
-};
-
-const SearchIconBox = () => {
-  return (
-    <div className="w-6 h-6 bg-[#898989]">
-      <Image src="/search-normal.png" alt="search" width={24} height={24} />
     </div>
   );
 };

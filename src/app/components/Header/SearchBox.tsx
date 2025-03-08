@@ -60,4 +60,5 @@ const SearchIconBox = () => {
     </div>
   );
 };
+
 export default SearchBox;

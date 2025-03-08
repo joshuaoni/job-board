@@ -19,3 +19,22 @@ export interface Job {
   salary_currency: string | null;
   company_website: string | null;
 }
+
+export interface TableProps {
+  data: Job[];
+}
+
+export interface TableBodyProps {
+  jobs: Job[];
+}
+
+export interface TableBodyRowProps {
+  job: Job;
+}
+
+export interface TitleDetailsProps {
+  company: string;
+  location: string;
+  title: string;
+  timeAgo: string;
+}
