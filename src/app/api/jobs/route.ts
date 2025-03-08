@@ -17,6 +17,7 @@ export async function POST(request: Request) {
       location,
       skills,
     };
+    console.log({ requestBody });
     // console.log({ requestBody });
 
     const apiUrl = "https://api.candivet.com/job/get-jobs-open";

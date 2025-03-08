@@ -282,9 +282,6 @@ export default function JobDetails({ params }: JobDetailsProps) {
             >
               Apply for this position
             </button>
-            <p className="text-gray-500 text-sm mt-2 text-center absolute -bottom-8">
-              Application feature coming soon
-            </p>
           </div>
         </div>
       </div>

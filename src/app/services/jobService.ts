@@ -5,6 +5,8 @@ export interface JobSearchParams {
   job_type: string;
   location: string;
   skills: string[];
+  page?: number;
+  per_page?: number;
 }
 
 export async function getJobs({
