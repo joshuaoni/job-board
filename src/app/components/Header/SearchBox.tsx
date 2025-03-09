@@ -72,7 +72,7 @@ export const SearchBox = ({ defaultValue = "", onSearch }: SearchBoxProps) => {
           type="search"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          onKeyPress={handleKeyPress}
+          onKeyDown={handleKeyPress}
           placeholder="Search for jobs"
           className="w-full bg-transparent focus:outline-none text-sm text-gray-700 z-10 disabled:opacity-50"
           aria-label="Search jobs"

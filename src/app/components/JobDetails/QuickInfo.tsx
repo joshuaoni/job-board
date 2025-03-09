@@ -47,7 +47,10 @@ const formatSalaryRange = (
 
 export const QuickInfo = ({ job }: QuickInfoProps) => {
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div
+      className="grid grid-cols-2 md:grid-cols-4 gap-4"
+      data-testid="quick-info-container"
+    >
       <QuickInfoCard
         title="Job Type"
         value={formatJobType(job.job_type)}
@@ -60,11 +63,13 @@ export const QuickInfo = ({ job }: QuickInfoProps) => {
       />
       <QuickInfoCard
         title="Salary Range"
-        value={formatSalaryRange(
-          job.salary_range_min,
-          job.salary_range_max,
-          job.salary_currency
-        )}
+        value={
+          job.salary_range_min && job.salary_range_max && job.salary_currency
+            ? `${
+                job.salary_currency
+              } ${job.salary_range_min.toLocaleString()} - ${job.salary_range_max.toLocaleString()}`
+            : "Not specified"
+        }
         className="bg-gray-100"
       />
       <QuickInfoCard

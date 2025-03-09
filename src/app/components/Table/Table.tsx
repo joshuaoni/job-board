@@ -15,7 +15,7 @@ interface TableSkeletonProps {
 
 export const TableSkeleton = ({ rows = 5 }: TableSkeletonProps) => {
   return (
-    <div className="w-full my-4">
+    <div className="w-full my-4" data-testid="table-skeleton">
       <div className="w-full h-[39.292px] rounded-[7.76px] bg-gray-200 mb-4 hidden md:block" />
       {Array.from({ length: rows }).map((_, index) => (
         <div
@@ -109,9 +109,10 @@ const TableBodyRow = ({
       onClick={handleClick}
       className={`w-full hover:bg-gray-50 cursor-pointer transition-all duration-200 ${className}`}
       style={style}
+      data-testid="table-row"
     >
       {/* Mobile View */}
-      <div className="md:hidden p-4">
+      <div className="md:hidden p-4" data-testid="table-row-mobile">
         <div className="space-y-2">
           <h3 className="font-medium text-base text-black">{job.job_title}</h3>
           <p className="text-sm text-gray-600">{job.company_name}</p>
@@ -144,7 +145,10 @@ const TableBodyRow = ({
         </div>
       </div>
       {/* Desktop View */}
-      <div className="hidden md:grid h-[51px] grid-cols-[2fr_1fr_1fr_1fr_1fr] gap-4 items-center hover:scale-[1.01]">
+      <div
+        className="hidden md:grid h-[51px] grid-cols-[2fr_1fr_1fr_1fr_1fr] gap-4 items-center hover:scale-[1.01]"
+        data-testid="table-row-desktop"
+      >
         <JobDetails
           company={job.company_name}
           location={job.job_location_name}

@@ -10,15 +10,12 @@ export async function POST(request: Request) {
       skills = [],
     } = body;
 
-    // Create request body for the external API
     const requestBody = {
       search_term,
       job_type,
       location,
       skills,
     };
-    console.log({ requestBody });
-    // console.log({ requestBody });
 
     const apiUrl = "https://api.candivet.com/job/get-jobs-open";
 
@@ -36,7 +33,6 @@ export async function POST(request: Request) {
     }
 
     const data = await response.json();
-    // console.log({ data });
     return NextResponse.json(data);
   } catch (error) {
     console.error("Error in /api/jobs:", error);

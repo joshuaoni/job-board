@@ -48,6 +48,7 @@ export const JobTypeFilter = ({ value, onChange }: FilterProps) => {
           className={`transform transition-transform duration-200 ${
             isOpen ? "rotate-180" : ""
           }`}
+          priority={false}
           aria-hidden="true"
         />
       </button>

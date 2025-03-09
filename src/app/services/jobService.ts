@@ -1,5 +1,3 @@
-import axios from "axios";
-
 export interface JobSearchParams {
   search_term: string;
   job_type: string;
@@ -15,18 +13,14 @@ export async function getJobs({
   location = "",
   skills = [],
 }: JobSearchParams) {
-  console.log("ran");
   try {
-    // Create request body
     const requestBody = {
       search_term,
       job_type,
       location,
       skills,
     };
-    console.log({ requestBody });
 
-    // Determine if we're running on the server or client
     const isServer = typeof window === "undefined";
     const baseUrl = isServer
       ? process.env.VERCEL_URL
