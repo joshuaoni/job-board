@@ -2,7 +2,6 @@ import "@testing-library/jest-dom";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { JobTypeFilter } from "../JobTypeFilter";
 
-// Mock next/navigation
 jest.mock("next/navigation", () => ({
   useRouter: () => ({
     push: jest.fn(),
@@ -85,5 +84,28 @@ describe("JobTypeFilter", () => {
 
     fireEvent.mouseDown(document.body);
     expect(screen.queryByRole("listbox")).not.toBeInTheDocument();
+  });
+
+  it("should match snapshot in default state", () => {
+    const { container } = render(
+      <JobTypeFilter value="" onChange={mockOnChange} />
+    );
+    expect(container).toMatchSnapshot();
+  });
+
+  it("should match snapshot with selected value", () => {
+    const { container } = render(
+      <JobTypeFilter value="full_time" onChange={mockOnChange} />
+    );
+    expect(container).toMatchSnapshot();
+  });
+
+  it("should match snapshot with dropdown open", () => {
+    const { container } = render(
+      <JobTypeFilter value="" onChange={mockOnChange} />
+    );
+    const button = screen.getByRole("button");
+    fireEvent.click(button);
+    expect(container).toMatchSnapshot();
   });
 });

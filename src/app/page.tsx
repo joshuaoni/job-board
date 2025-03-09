@@ -1,6 +1,6 @@
 import { Filters } from "./components/Filters/Filters";
 import { Header, TitleContainer } from "./components/Header/Header";
-import JobTableWrapper from "./components/Table/JobTableWrapper";
+import JobTableAndPaginationWrapper from "./components/Table/JobTableAndPaginationWrapper";
 
 export default function Home({
   searchParams,
@@ -13,7 +13,7 @@ export default function Home({
         <Header />
         <TitleContainer />
         <Filters />
-        <JobTableWrapper searchParams={searchParams} />
+        <JobTableAndPaginationWrapper searchParams={searchParams} />
       </div>
     </main>
   );

@@ -1,7 +1,4 @@
-interface SectionProps {
-  title: string;
-  children: React.ReactNode;
-}
+import { SectionProps } from "@/app/types/job";
 
 export const Section = ({ title, children }: SectionProps) => {
   return (

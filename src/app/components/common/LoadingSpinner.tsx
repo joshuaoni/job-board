@@ -1,7 +1,4 @@
-interface LoadingSpinnerProps {
-  size?: "small" | "medium" | "large";
-  className?: string;
-}
+import { LoadingSpinnerProps } from "@/app/types/common";
 
 const sizeClasses = {
   small: "w-4 h-4",

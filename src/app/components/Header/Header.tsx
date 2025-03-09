@@ -11,7 +11,7 @@ export const Header = () => {
 
 const HeaderContainer = () => {
   return (
-    <div className="app-header-container w-full flex flex-col md:flex-row md:h-[48px] space-y-4 md:space-y-0 justify-between mx-auto">
+    <div className="app-header-container w-full flex items-center flex-col md:flex-row md:h-[48px] space-y-4 md:space-y-0 justify-between mx-auto">
       <LeftHeader />
       <RightHeader />
     </div>
@@ -20,7 +20,7 @@ const HeaderContainer = () => {
 
 const LeftHeader = () => {
   return (
-    <div className="app-left-header relative w-full md:w-[340px] h-[42px]">
+    <div className="app-left-header flex items-center relative w-full md:w-[340px] h-[42px]">
       <SearchBox />
     </div>
   );
@@ -28,7 +28,7 @@ const LeftHeader = () => {
 
 const RightHeader = () => {
   return (
-    <div className="cursor-pointer app-right-header w-full md:w-auto flex items-center justify-center md:justify-start space-x-4 bg-[#065844] text-white px-4 py-3 md:py-0 rounded-lg">
+    <div className="app-right-header cursor-pointer h-full app-right-header w-full md:w-auto flex items-center justify-center md:justify-start space-x-4 bg-[#065844] text-white px-4 py-3 md:py-0 rounded-lg">
       <PlusIconBox />
       <CreateJobText />
     </div>

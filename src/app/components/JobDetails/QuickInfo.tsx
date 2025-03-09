@@ -1,10 +1,5 @@
 import { formatJobType } from "@/app/utils/formatters";
-
-interface QuickInfoCardProps {
-  title: string;
-  value: string;
-  className?: string;
-}
+import { QuickInfoCardProps, QuickInfoProps } from "@/app/types/job";
 
 const QuickInfoCard = ({
   title,
@@ -18,17 +13,6 @@ const QuickInfoCard = ({
     </div>
   );
 };
-
-interface QuickInfoProps {
-  job: {
-    job_type: string;
-    years_of_experience_required: string;
-    salary_range_min: number | null;
-    salary_range_max: number | null;
-    salary_currency: string | null;
-    job_location_name: string;
-  };
-}
 
 const formatSalaryRange = (
   min: number | null,
@@ -63,13 +47,11 @@ export const QuickInfo = ({ job }: QuickInfoProps) => {
       />
       <QuickInfoCard
         title="Salary Range"
-        value={
-          job.salary_range_min && job.salary_range_max && job.salary_currency
-            ? `${
-                job.salary_currency
-              } ${job.salary_range_min.toLocaleString()} - ${job.salary_range_max.toLocaleString()}`
-            : "Not specified"
-        }
+        value={formatSalaryRange(
+          job.salary_range_min,
+          job.salary_range_max,
+          job.salary_currency
+        )}
         className="bg-gray-100"
       />
       <QuickInfoCard

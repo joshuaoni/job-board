@@ -20,7 +20,6 @@ export const Filters = () => {
   const updateFilters = (updates: FilterUpdateParams) => {
     const params = new URLSearchParams(searchParams.toString());
 
-    // Update params based on the changes
     Object.entries(updates).forEach(([key, value]) => {
       if (value && value !== "Select") {
         params.set(key, value);
@@ -29,7 +28,6 @@ export const Filters = () => {
       }
     });
 
-    // Preserve search term
     const searchTerm = searchParams.get("search_term");
     if (searchTerm) {
       params.set("search_term", searchTerm);
@@ -44,7 +42,6 @@ export const Filters = () => {
     updateFilters({ [key]: value });
   };
 
-  // Set initial job type on mount if not already set
   useEffect(() => {
     if (!searchParams.get("job_type")) {
       updateFilters({ job_type: "full_time" });

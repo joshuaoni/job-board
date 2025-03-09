@@ -2,13 +2,7 @@
 
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
-
-interface PaginationProps {
-  currentPage: number;
-  totalPages: number;
-  hasNextPage: boolean;
-  hasPrevPage: boolean;
-}
+import { PaginationProps, ArrowContainerProps } from "@/app/types/pagination";
 
 export const PaginationContainer = ({
   currentPage,
@@ -38,7 +32,6 @@ const Pagination = ({
   const searchParams = useSearchParams();
 
   const handlePageChange = (newPage: number) => {
-    console.log("ran");
     const params = new URLSearchParams(searchParams.toString());
     params.set("page", newPage.toString());
     router.push(`/?${params.toString()}`);
@@ -67,13 +60,6 @@ const ArrowElement = ({ text }: { text: string }) => {
     </div>
   );
 };
-
-interface ArrowContainerProps {
-  onPrevClick: () => void;
-  onNextClick: () => void;
-  hasPrevPage: boolean;
-  hasNextPage: boolean;
-}
 
 const ArrowContainer = ({
   onPrevClick,

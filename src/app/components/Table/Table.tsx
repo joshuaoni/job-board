@@ -4,14 +4,14 @@ import { useRouter } from "next/navigation";
 import { TableHeader } from "./TableHeader";
 import { JobDetails } from "./JobDetails";
 import { JobType, JobSkills, Languages, Tags } from "./TableCells";
-import { TableProps, TableBodyProps, TableBodyRowProps } from "@/app/types/job";
+import {
+  TableProps,
+  TableBodyProps,
+  TableSkeletonProps,
+  ExtendedTableBodyRowProps,
+} from "@/app/types/job";
 import { getTimeAgo } from "@/app/utils/timeAgo";
-import { LoadingSpinner } from "../common/LoadingSpinner";
 import { animations } from "@/app/utils/animations";
-
-interface TableSkeletonProps {
-  rows?: number;
-}
 
 export const TableSkeleton = ({ rows = 5 }: TableSkeletonProps) => {
   return (
@@ -22,7 +22,6 @@ export const TableSkeleton = ({ rows = 5 }: TableSkeletonProps) => {
           key={index}
           className="w-full border-b border-gray-100 animate-pulse"
         >
-          {/* Mobile View */}
           <div className="md:hidden p-4">
             <div className="space-y-3">
               <div className="w-3/4 h-5 bg-gray-100 rounded" />
@@ -33,7 +32,7 @@ export const TableSkeleton = ({ rows = 5 }: TableSkeletonProps) => {
               </div>
             </div>
           </div>
-          {/* Desktop View */}
+
           <div className="hidden md:grid h-[51px] grid-cols-[2fr_1fr_1fr_1fr_1fr] gap-4 items-center">
             <div className="h-full rounded-[10px] p-1 pl-0">
               <div className="h-full w-full bg-gray-100 rounded-[6px]" />
@@ -87,11 +86,6 @@ const TableBody = ({ jobs }: TableBodyProps) => {
   );
 };
 
-interface ExtendedTableBodyRowProps extends TableBodyRowProps {
-  className?: string;
-  style?: React.CSSProperties;
-}
-
 const TableBodyRow = ({
   job,
   className = "",
@@ -111,7 +105,6 @@ const TableBodyRow = ({
       style={style}
       data-testid="table-row"
     >
-      {/* Mobile View */}
       <div className="md:hidden p-4" data-testid="table-row-mobile">
         <div className="space-y-2">
           <h3 className="font-medium text-base text-black">{job.job_title}</h3>
@@ -144,7 +137,6 @@ const TableBodyRow = ({
           </div>
         </div>
       </div>
-      {/* Desktop View */}
       <div
         className="hidden md:grid h-[51px] grid-cols-[2fr_1fr_1fr_1fr_1fr] gap-4 items-center hover:scale-[1.01]"
         data-testid="table-row-desktop"

@@ -1,8 +1,4 @@
-interface QuickInfoCardProps {
-  title: string;
-  value: string;
-  className?: string;
-}
+import { QuickInfoCardProps } from "@/app/types/job";
 
 export const QuickInfoCard = ({
   title,

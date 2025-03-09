@@ -1,10 +1,5 @@
 import { formatJobType } from "@/app/utils/formatters";
-
-interface ListWithCounterProps {
-  items: string[];
-  displayCount?: number;
-  badgeClassName?: string;
-}
+import { ListWithCounterProps } from "@/app/types/job";
 
 const ListWithCounter = ({
   items,

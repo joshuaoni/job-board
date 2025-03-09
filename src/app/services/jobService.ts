@@ -1,11 +1,4 @@
-export interface JobSearchParams {
-  search_term: string;
-  job_type: string;
-  location: string;
-  skills: string[];
-  page?: number;
-  per_page?: number;
-}
+import { JobSearchParams } from "@/app/types/job";
 
 export async function getJobs({
   search_term = "",

@@ -3,7 +3,6 @@ import { render, screen } from "@testing-library/react";
 import { QuickInfo } from "../QuickInfo";
 import { formatJobType } from "@/app/utils/formatters";
 
-// Mock formatJobType
 jest.mock("@/app/utils/formatters", () => ({
   formatJobType: jest.fn((type) => `Formatted ${type}`),
 }));

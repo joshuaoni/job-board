@@ -4,7 +4,6 @@ import { Table } from "../Table";
 import { formatJobType } from "@/app/utils/formatters";
 import { Job } from "@/app/types/job";
 
-// Mock next/navigation
 const mockPush = jest.fn();
 jest.mock("next/navigation", () => ({
   useRouter: () => ({
@@ -12,7 +11,6 @@ jest.mock("next/navigation", () => ({
   }),
 }));
 
-// Mock formatJobType
 jest.mock("@/app/utils/formatters", () => ({
   formatJobType: jest.fn((type) => `Formatted ${type}`),
 }));
@@ -130,5 +128,20 @@ describe("Table", () => {
 
     const desktopView = screen.getAllByTestId("table-row-desktop")[0];
     expect(desktopView).toHaveClass("hidden", "md:grid");
+  });
+
+  it("should match snapshot with data", () => {
+    const { container } = render(<Table data={mockJobs} />);
+    expect(container).toMatchSnapshot();
+  });
+
+  it("should match snapshot when loading", () => {
+    const { container } = render(<Table data={[]} isLoading={true} />);
+    expect(container).toMatchSnapshot();
+  });
+
+  it("should match snapshot when empty", () => {
+    const { container } = render(<Table data={[]} />);
+    expect(container).toMatchSnapshot();
   });
 });

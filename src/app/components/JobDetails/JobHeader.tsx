@@ -1,11 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Job } from "@/app/types/job";
-
-interface JobHeaderProps {
-  job: Job;
-  timeAgo: string;
-}
+import { Job, JobHeaderProps } from "@/app/types/job";
 
 export const JobHeader = ({ job, timeAgo }: JobHeaderProps) => {
   return (

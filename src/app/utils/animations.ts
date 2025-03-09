@@ -5,7 +5,6 @@ export const animations = {
   popIn: "animate-[popIn_0.2s_cubic-bezier(0.68,-0.55,0.265,1.55)]",
 } as const;
 
-// Add these to your tailwind.config.js keyframes
 export const keyframes = {
   fadeIn: {
     "0%": { opacity: "0" },

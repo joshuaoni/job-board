@@ -8,25 +8,16 @@ import { getTimeAgo } from "@/app/utils/timeAgo";
 import { Section } from "@/app/components/JobDetails/Section";
 import { JobHeader } from "@/app/components/JobDetails/JobHeader";
 import { QuickInfo } from "@/app/components/JobDetails/QuickInfo";
-import { Job } from "@/app/types/job";
-import { LoadingSpinner } from "@/app/components/common/LoadingSpinner";
+import { Job, JobDetailsProps } from "@/app/types/job";
 import { animations } from "@/app/utils/animations";
-
-interface JobDetailsProps {
-  params: {
-    id: string;
-  };
-}
 
 const JOB_TYPES = ["full_time", "part_time", "hybrid", "internship"];
 
 const JobDetailsSkeleton = () => (
   <div className="min-h-screen bg-white">
     <div className="max-w-screen-xl w-full mx-auto px-4 md:px-20 py-4 md:py-8 animate-pulse">
-      {/* Back button skeleton */}
       <div className="w-24 h-8 bg-gray-100 rounded mb-4 md:mb-6" />
 
-      {/* Header section skeleton */}
       <div className="bg-[#F9F9F9] rounded-[10px] p-4 md:p-6 mb-6 md:mb-8">
         <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-6">
           <div className="w-[60px] h-[60px] md:w-[80px] md:h-[80px] rounded-full bg-gray-100" />
@@ -43,9 +34,7 @@ const JobDetailsSkeleton = () => (
         </div>
       </div>
 
-      {/* Content section skeleton */}
       <div className="grid grid-cols-1 gap-4 md:gap-6">
-        {/* Quick info cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
           {Array.from({ length: 4 }).map((_, i) => (
             <div key={i} className="p-3 md:p-4 bg-gray-100 rounded-lg">
@@ -55,7 +44,6 @@ const JobDetailsSkeleton = () => (
           ))}
         </div>
 
-        {/* Content sections */}
         {Array.from({ length: 5 }).map((_, i) => (
           <div
             key={i}
@@ -272,7 +260,6 @@ export default function JobDetails({ params }: JobDetailsProps) {
             </Section>
           </div>
 
-          {/* Apply Button Section */}
           <div
             className={`flex flex-col items-center mt-6 md:mt-8 ${animations.slideUp}`}
             style={{ animationDelay: "1s" }}

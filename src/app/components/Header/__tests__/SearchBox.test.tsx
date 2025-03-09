@@ -2,7 +2,6 @@ import "@testing-library/jest-dom";
 import { render, screen, fireEvent, act } from "@testing-library/react";
 import { SearchBox } from "../SearchBox";
 
-// Mock next/navigation
 jest.mock("next/navigation", () => ({
   useRouter: () => ({
     push: jest.fn(),
@@ -102,5 +101,31 @@ describe("SearchBox", () => {
       "aria-label",
       "Search jobs"
     );
+  });
+
+  it("should match snapshot with default state", () => {
+    const { container } = render(<SearchBox onSearch={mockOnSearch} />);
+    expect(container).toMatchSnapshot();
+  });
+
+  it("should match snapshot with default value", () => {
+    const { container } = render(
+      <SearchBox defaultValue="developer" onSearch={mockOnSearch} />
+    );
+    expect(container).toMatchSnapshot();
+  });
+
+  it("should match snapshot in loading state", async () => {
+    mockOnSearch.mockImplementation(
+      () => new Promise((resolve) => setTimeout(resolve, 100))
+    );
+    const { container } = render(<SearchBox onSearch={mockOnSearch} />);
+
+    const searchButton = screen.getByRole("button", { name: "Search jobs" });
+    await act(async () => {
+      fireEvent.click(searchButton);
+    });
+
+    expect(container).toMatchSnapshot();
   });
 });

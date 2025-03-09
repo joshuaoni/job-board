@@ -5,7 +5,7 @@ import { Table } from "./Table";
 import { getJobs } from "@/app/services/jobService";
 import { PaginationContainer } from "../Pagination/Pagination";
 
-export default function JobTableWrapper({
+export default function JobTableAndPaginationWrapper({
   searchParams,
 }: {
   searchParams: any;
@@ -13,7 +13,6 @@ export default function JobTableWrapper({
   const page = Number(searchParams.page) || 1;
   const pageSize = 10;
 
-  // Fetch jobs with SWR
   const {
     data: jobs = [],
     error,
@@ -29,12 +28,11 @@ export default function JobTableWrapper({
           ? searchParams.skills.split(",").map((s: string) => s.trim())
           : [],
       }),
-    { revalidateOnFocus: false } // Optional: Prevents re-fetching on tab switch
+    { revalidateOnFocus: false }
   );
 
   if (error) return <p className="text-red-500">Failed to load jobs.</p>;
 
-  // Pagination Calculation
   const totalItems = jobs.length;
   const totalPages = Math.ceil(totalItems / pageSize);
   const startIndex = (page - 1) * pageSize;

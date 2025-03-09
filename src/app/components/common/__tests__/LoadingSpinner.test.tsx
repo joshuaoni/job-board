@@ -7,7 +7,7 @@ describe("LoadingSpinner", () => {
     render(<LoadingSpinner />);
     const spinner = screen.getByRole("status");
     expect(spinner).toBeInTheDocument();
-    expect(spinner).toHaveClass("w-8", "h-8"); // medium is default
+    expect(spinner).toHaveClass("w-8", "h-8");
   });
 
   it("should render with small size", () => {
@@ -40,5 +40,25 @@ describe("LoadingSpinner", () => {
     render(<LoadingSpinner className="test-class" />);
     const spinner = screen.getByRole("status");
     expect(spinner).toHaveClass("test-class");
+  });
+
+  it("should match snapshot with default size", () => {
+    const { container } = render(<LoadingSpinner />);
+    expect(container).toMatchSnapshot();
+  });
+
+  it("should match snapshot with small size", () => {
+    const { container } = render(<LoadingSpinner size="small" />);
+    expect(container).toMatchSnapshot();
+  });
+
+  it("should match snapshot with large size", () => {
+    const { container } = render(<LoadingSpinner size="large" />);
+    expect(container).toMatchSnapshot();
+  });
+
+  it("should match snapshot with custom className", () => {
+    const { container } = render(<LoadingSpinner className="test-class" />);
+    expect(container).toMatchSnapshot();
   });
 });

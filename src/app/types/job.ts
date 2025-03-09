@@ -20,6 +20,24 @@ export interface Job {
   company_website: string | null;
 }
 
+export interface QuickInfoCardProps {
+  title: string;
+  value: string;
+  className?: string;
+}
+
+export interface QuickInfoProps {
+  job: Pick<
+    Job,
+    | "job_type"
+    | "years_of_experience_required"
+    | "salary_range_min"
+    | "salary_range_max"
+    | "salary_currency"
+    | "job_location_name"
+  >;
+}
+
 export interface TableProps {
   data: Job[];
   isLoading?: boolean;
@@ -33,9 +51,49 @@ export interface TableBodyRowProps {
   job: Job;
 }
 
+export interface ExtendedTableBodyRowProps extends TableBodyRowProps {
+  className?: string;
+  style?: React.CSSProperties;
+}
+
 export interface TitleDetailsProps {
   company: string;
   location: string;
   title: string;
   timeAgo: string;
+}
+
+export interface JobHeaderProps {
+  job: Pick<Job, "job_title" | "company_name" | "job_location_name">;
+  timeAgo: string;
+}
+
+export interface TableSkeletonProps {
+  rows?: number;
+}
+
+export interface ListWithCounterProps {
+  items: string[];
+  displayCount?: number;
+  badgeClassName?: string;
+}
+
+export interface JobDetailsProps {
+  params: {
+    id: string;
+  };
+}
+
+export interface JobSearchParams {
+  search_term: string;
+  job_type: string;
+  location: string;
+  skills: string[];
+  page?: number;
+  per_page?: number;
+}
+
+export interface SectionProps {
+  title: string;
+  children: React.ReactNode;
 }
