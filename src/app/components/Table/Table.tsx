@@ -7,6 +7,7 @@ import { JobType, JobSkills, Languages, Tags } from "./TableCells";
 import { TableProps, TableBodyProps, TableBodyRowProps } from "@/app/types/job";
 import { getTimeAgo } from "@/app/utils/timeAgo";
 import { LoadingSpinner } from "../common/LoadingSpinner";
+import { animations } from "@/app/utils/animations";
 
 interface TableSkeletonProps {
   rows?: number;
@@ -40,7 +41,7 @@ export const Table = ({ data = [], isLoading = false }: TableProps) => {
   }
 
   return (
-    <div className="app-table-container w-full my-4">
+    <div className={`w-full my-4 ${animations.fadeIn}`}>
       <TableHeader />
       <TableBody jobs={data} />
     </div>
@@ -50,7 +51,9 @@ export const Table = ({ data = [], isLoading = false }: TableProps) => {
 const TableBody = ({ jobs }: TableBodyProps) => {
   if (!jobs.length) {
     return (
-      <div className="w-full py-8 text-center text-gray-500">
+      <div
+        className={`w-full py-8 text-center text-gray-500 ${animations.fadeIn}`}
+      >
         No jobs found matching your criteria
       </div>
     );
@@ -58,14 +61,28 @@ const TableBody = ({ jobs }: TableBodyProps) => {
 
   return (
     <div className="w-full">
-      {jobs.map((job) => (
-        <TableBodyRow key={job.id} job={job} />
+      {jobs.map((job, index) => (
+        <TableBodyRow
+          key={job.id}
+          job={job}
+          className={`${animations.slideUp}`}
+          style={{ animationDelay: `${index * 0.05}s` }}
+        />
       ))}
     </div>
   );
 };
 
-const TableBodyRow = ({ job }: TableBodyRowProps) => {
+interface ExtendedTableBodyRowProps extends TableBodyRowProps {
+  className?: string;
+  style?: React.CSSProperties;
+}
+
+const TableBodyRow = ({
+  job,
+  className = "",
+  style,
+}: ExtendedTableBodyRowProps) => {
   const router = useRouter();
   const timeAgo = getTimeAgo(new Date(job.created_at));
 
@@ -76,7 +93,8 @@ const TableBodyRow = ({ job }: TableBodyRowProps) => {
   return (
     <div
       onClick={handleClick}
-      className="w-full h-[51px] border-b border-white grid grid-cols-[2fr_1fr_1fr_1fr_1fr] gap-4 items-center hover:bg-gray-50 cursor-pointer transition-colors"
+      className={`w-full h-[51px] border-b border-white grid grid-cols-[2fr_1fr_1fr_1fr_1fr] gap-4 items-center hover:bg-gray-50 cursor-pointer transition-all duration-200 hover:scale-[1.01] ${className}`}
+      style={style}
     >
       <JobDetails
         company={job.company_name}

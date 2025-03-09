@@ -10,6 +10,7 @@ import { JobHeader } from "@/app/components/JobDetails/JobHeader";
 import { QuickInfo } from "@/app/components/JobDetails/QuickInfo";
 import { Job } from "@/app/types/job";
 import { LoadingSpinner } from "@/app/components/common/LoadingSpinner";
+import { animations } from "@/app/utils/animations";
 
 interface JobDetailsProps {
   params: {
@@ -74,7 +75,9 @@ const JobDetailsSkeleton = () => (
 );
 
 const ErrorState = () => (
-  <div className="min-h-screen bg-white flex items-center justify-center">
+  <div
+    className={`min-h-screen bg-white flex items-center justify-center ${animations.fadeIn}`}
+  >
     <div className="text-center">
       <h1 className="text-2xl font-bold mb-4">Job Not Found</h1>
       <Link href="/" className="text-blue-600 hover:underline">
@@ -150,81 +153,139 @@ export default function JobDetails({ params }: JobDetailsProps) {
   };
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className={`min-h-screen bg-white ${animations.fadeIn}`}>
       <div className="max-w-screen-xl w-full mx-auto px-20 py-8">
-        <JobHeader job={job} timeAgo={timeAgo} />
+        <div className={animations.slideUp} style={{ animationDelay: "0.1s" }}>
+          <JobHeader job={job} timeAgo={timeAgo} />
+        </div>
 
         <div className="grid grid-cols-1 gap-6">
-          <QuickInfo job={job} />
+          <div
+            className={animations.slideUp}
+            style={{ animationDelay: "0.2s" }}
+          >
+            <QuickInfo job={job} />
+          </div>
 
           {job.company_description && (
-            <Section title="About the Company">
+            <div
+              className={animations.slideUp}
+              style={{ animationDelay: "0.3s" }}
+            >
+              <Section title="About the Company">
+                <p className="text-gray-700 whitespace-pre-line">
+                  {job.company_description}
+                </p>
+              </Section>
+            </div>
+          )}
+
+          <div
+            className={animations.slideUp}
+            style={{ animationDelay: "0.4s" }}
+          >
+            <Section title="Job Description">
               <p className="text-gray-700 whitespace-pre-line">
-                {job.company_description}
+                {job.job_description}
               </p>
             </Section>
-          )}
+          </div>
 
-          <Section title="Job Description">
-            <p className="text-gray-700 whitespace-pre-line">
-              {job.job_description}
-            </p>
-          </Section>
-
-          <Section title="Required Skills">
-            <div className="flex flex-wrap gap-2">
-              {job.required_skills.split(",").map((skill: string) => (
-                <span
-                  key={skill}
-                  className="px-3 py-1 bg-gray-100 rounded-full text-sm"
-                >
-                  {skill.trim()}
-                </span>
-              ))}
-            </div>
-          </Section>
-
-          {job.educational_requirements && (
-            <Section title="Educational Requirements">
-              <p className="text-gray-700">{job.educational_requirements}</p>
-            </Section>
-          )}
-
-          {job.languages && (
-            <Section title="Languages">
+          <div
+            className={animations.slideUp}
+            style={{ animationDelay: "0.5s" }}
+          >
+            <Section title="Required Skills">
               <div className="flex flex-wrap gap-2">
-                {job.languages.split(",").map((language: string) => (
+                {job.required_skills.split(",").map((skill: string) => (
                   <span
-                    key={language}
+                    key={skill}
                     className="px-3 py-1 bg-gray-100 rounded-full text-sm"
                   >
-                    {language.trim()}
+                    {skill.trim()}
                   </span>
                 ))}
               </div>
             </Section>
+          </div>
+
+          {job.educational_requirements && (
+            <div
+              className={animations.slideUp}
+              style={{ animationDelay: "0.6s" }}
+            >
+              <Section title="Educational Requirements">
+                <p className="text-gray-700">{job.educational_requirements}</p>
+              </Section>
+            </div>
+          )}
+
+          {job.languages && (
+            <div
+              className={animations.slideUp}
+              style={{ animationDelay: "0.7s" }}
+            >
+              <Section title="Languages">
+                <div className="flex flex-wrap gap-2">
+                  {job.languages.split(",").map((language: string) => (
+                    <span
+                      key={language}
+                      className="px-3 py-1 bg-gray-100 rounded-full text-sm"
+                    >
+                      {language.trim()}
+                    </span>
+                  ))}
+                </div>
+              </Section>
+            </div>
           )}
 
           {job.additional_benefits && (
-            <Section title="Additional Benefits">
-              <p className="text-gray-700 whitespace-pre-line">
-                {job.additional_benefits}
-              </p>
-            </Section>
+            <div
+              className={animations.slideUp}
+              style={{ animationDelay: "0.8s" }}
+            >
+              <Section title="Additional Benefits">
+                <p className="text-gray-700 whitespace-pre-line">
+                  {job.additional_benefits}
+                </p>
+              </Section>
+            </div>
           )}
 
-          <Section title="Tags">
-            <div className="flex flex-wrap gap-2">
-              {job.tags.split(",").map((tag: string) => (
-                <span
-                  key={tag}
-                  className="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm"
-                >
-                  {tag.trim()}
-                </span>
-              ))}
-            </div>
-          </Section>
+          <div
+            className={animations.slideUp}
+            style={{ animationDelay: "0.9s" }}
+          >
+            <Section title="Tags">
+              <div className="flex flex-wrap gap-2">
+                {job.tags.split(",").map((tag: string) => (
+                  <span
+                    key={tag}
+                    className="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm"
+                  >
+                    {tag.trim()}
+                  </span>
+                ))}
+              </div>
+            </Section>
+          </div>
+
+          {/* Apply Button Section */}
+          <div
+            className={`flex justify-center mt-8 ${animations.slideUp}`}
+            style={{ animationDelay: "1s" }}
+          >
+            <button
+              type="button"
+              className="bg-blue-600 text-white px-12 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transform hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-blue-300 shadow-lg hover:shadow-xl"
+            >
+              Apply for this position
+            </button>
+            <p className="text-gray-500 text-sm mt-2 text-center absolute -bottom-8">
+              Application feature coming soon
+            </p>
+          </div>
         </div>
       </div>
     </main>

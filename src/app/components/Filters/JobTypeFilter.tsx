@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { FilterProps, JOB_TYPE_OPTIONS } from "@/app/types/filters";
+import { animations } from "@/app/utils/animations";
 
 export const JobTypeFilter = ({ value, onChange }: FilterProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,7 +31,9 @@ export const JobTypeFilter = ({ value, onChange }: FilterProps) => {
     <div ref={dropdownRef} className="relative w-[218px]">
       <button
         type="button"
-        className="w-full h-[44px] rounded-lg px-4 bg-[#EBEBEB] text-black flex justify-between items-center hover:bg-[#E5E5E5] transition-colors focus:outline-none focus:ring-2 focus:ring-gray-300"
+        className={`w-full h-[44px] rounded-lg px-4 bg-[#EBEBEB] text-black flex justify-between items-center hover:bg-[#E5E5E5] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-300 ${
+          isOpen ? "ring-2 ring-gray-300" : ""
+        }`}
         onClick={() => setIsOpen(!isOpen)}
         aria-haspopup="listbox"
         aria-expanded={isOpen}
@@ -42,13 +45,16 @@ export const JobTypeFilter = ({ value, onChange }: FilterProps) => {
           alt=""
           width={21}
           height={21}
+          className={`transform transition-transform duration-200 ${
+            isOpen ? "rotate-180" : ""
+          }`}
           aria-hidden="true"
         />
       </button>
 
       {isOpen && (
         <ul
-          className="absolute top-[48px] left-0 w-full bg-white text-black shadow-lg rounded-lg z-10 py-1"
+          className={`absolute top-[48px] left-0 w-full bg-white text-black shadow-lg rounded-lg z-10 py-1 ${animations.scaleIn} origin-top`}
           role="listbox"
         >
           {JOB_TYPE_OPTIONS.map(({ key, label }) => (
