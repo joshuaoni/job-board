@@ -4,7 +4,7 @@
 
 I have successfully built a Job Board page with a responsive, maintainable, and scalable architecture.
 
-## Core Features Implemented ✅
+## Core Features Implemented
 
 ### 🔹 Job Listings Display
 
@@ -20,7 +20,7 @@ I have successfully built a Job Board page with a responsive, maintainable, and 
   - Location
   - Skills
 
-### 🔹 Job Details Page (Optional)
+### 🔹 Job Details Page
 
 - Clicking on a job navigates to a separate Job Details Page with complete information.
 
@@ -28,7 +28,7 @@ I have successfully built a Job Board page with a responsive, maintainable, and 
 
 - Added an Apply button (non-functional for now).
 
-## Technical Implementation 🔧
+## Technical Implementation
 
 ### 🔹 Tech Stack
 
@@ -39,7 +39,7 @@ I have successfully built a Job Board page with a responsive, maintainable, and 
 - **API Integration:** Successfully fetched data from an API with proper loading/error handling
 - **Routing:** Implemented Next.js routing for seamless navigation
 
-## Additional Enhancements 🎯
+## Additional Enhancements
 
 - Implemented **Server-Side Rendering (SSR)** for job listings.
 - Used **SWR** for optimized and efficient data fetching.
@@ -48,4 +48,4 @@ I have successfully built a Job Board page with a responsive, maintainable, and 
 - Implemented **pagination** for job listings.
 - Wrote unit tests using **Jest and React Testing Library**.
 
-This project follows a **mobile-first approach**, ensuring responsiveness across all devices while maintaining clean and scalable code. 🚀
+This project follows a **mobile-first approach**, ensuring responsiveness across all devices while maintaining clean and scalable code.
