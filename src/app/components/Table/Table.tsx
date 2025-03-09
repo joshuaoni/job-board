@@ -6,10 +6,41 @@ import { JobDetails } from "./JobDetails";
 import { JobType, JobSkills, Languages, Tags } from "./TableCells";
 import { TableProps, TableBodyProps, TableBodyRowProps } from "@/app/types/job";
 import { getTimeAgo } from "@/app/utils/timeAgo";
+import { LoadingSpinner } from "../common/LoadingSpinner";
 
-export const Table = ({ data = [] }: TableProps) => {
+interface TableSkeletonProps {
+  rows?: number;
+}
+
+const TableSkeleton = ({ rows = 5 }: TableSkeletonProps) => {
   return (
-    <div className="w-full my-4">
+    <div className="w-full my-4 animate-pulse">
+      <div className="w-full h-[39.292px] rounded-[7.76px] bg-gray-200 mb-4" />
+      {Array.from({ length: rows }).map((_, index) => (
+        <div
+          key={index}
+          className="w-full h-[51px] border-b border-white grid grid-cols-[2fr_1fr_1fr_1fr_1fr] gap-4 items-center"
+        >
+          <div className="h-full rounded-[10px] p-1 pl-0">
+            <div className="h-full w-full bg-gray-100 rounded-[6px]" />
+          </div>
+          <div className="h-5 bg-gray-100 rounded" />
+          <div className="h-5 bg-gray-100 rounded" />
+          <div className="h-5 bg-gray-100 rounded" />
+          <div className="h-5 bg-gray-100 rounded" />
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export const Table = ({ data = [], isLoading = false }: TableProps) => {
+  if (isLoading) {
+    return <TableSkeleton />;
+  }
+
+  return (
+    <div className="app-table-container w-full my-4">
       <TableHeader />
       <TableBody jobs={data} />
     </div>

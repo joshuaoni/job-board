@@ -1,3 +1,5 @@
+import { formatJobType } from "@/app/utils/formatters";
+
 interface ListWithCounterProps {
   items: string[];
   displayCount?: number;
@@ -33,7 +35,7 @@ export const JobType = ({ type }: { type: string }) => {
   return (
     <div className="w-full h-[19px] flex items-center justify-start">
       <p className="font-inter font-normal text-[16px] leading-[100%] tracking-[5%] text-black">
-        {type}
+        {formatJobType(type)}
       </p>
     </div>
   );

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import SearchBox from "./SearchBox";
+import { SearchBox } from "./SearchBox";
 
 export const Header = () => {
   return (

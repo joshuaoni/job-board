@@ -3,23 +3,47 @@
 import { useState, useCallback } from "react";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
+import { LoadingSpinner } from "../common/LoadingSpinner";
+import { SearchBoxProps } from "@/app/types/header";
 
-const SearchBox = () => {
+const SearchIcon = () => (
+  <div className="w-6 h-6">
+    <Image
+      src="/search-normal.png"
+      alt=""
+      width={24}
+      height={24}
+      aria-hidden="true"
+    />
+  </div>
+);
+
+export const SearchBox = ({ defaultValue = "", onSearch }: SearchBoxProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [searchTerm, setSearchTerm] = useState(
-    searchParams.get("search_term") || ""
+    searchParams.get("search_term") || defaultValue
   );
+  const [isSearching, setIsSearching] = useState(false);
 
-  const handleSearch = useCallback(() => {
+  const handleSearch = useCallback(async () => {
     const params = new URLSearchParams(searchParams.toString());
     if (searchTerm.trim()) {
       params.set("search_term", searchTerm.trim());
     } else {
       params.delete("search_term");
     }
-    router.push(`/?${params.toString()}`);
-  }, [searchTerm, searchParams, router]);
+
+    setIsSearching(true);
+    try {
+      if (onSearch) {
+        await onSearch(searchTerm.trim());
+      }
+      router.push(`/?${params.toString()}`);
+    } finally {
+      setIsSearching(false);
+    }
+  }, [searchTerm, searchParams, router, onSearch]);
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
@@ -28,37 +52,33 @@ const SearchBox = () => {
   };
 
   return (
-    <div className="relative w-full max-w-md">
-      {/* Background Box (Now part of the parent, not absolute) */}
+    <div className="relative w-full max-w-md" role="search">
       <div className="bg-[#F0F0F0] rounded-full w-full h-10 flex items-center px-12">
-        {/* Search Icon with Click Handler */}
-        <div
-          className="absolute left-4 top-1/2 -translate-y-1/2 w-6 h-6 flex items-center justify-center cursor-pointer"
+        <button
+          type="button"
+          className="absolute left-4 top-1/2 -translate-y-1/2 w-6 h-6 flex items-center justify-center cursor-pointer hover:opacity-80 transition-opacity focus:outline-none focus:ring-2 focus:ring-gray-400 rounded-full disabled:opacity-50"
           onClick={handleSearch}
+          disabled={isSearching}
+          aria-label="Search jobs"
         >
-          <SearchIconBox />
-        </div>
+          {isSearching ? (
+            <LoadingSpinner size="small" className="text-gray-600" />
+          ) : (
+            <SearchIcon />
+          )}
+        </button>
 
-        {/* Input Field - Ensures visibility */}
         <input
-          type="text"
+          type="search"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           onKeyPress={handleKeyPress}
           placeholder="Search for jobs"
-          className="w-full bg-transparent focus:outline-none text-sm text-gray-700 z-10"
+          className="w-full bg-transparent focus:outline-none text-sm text-gray-700 z-10 disabled:opacity-50"
+          aria-label="Search jobs"
+          disabled={isSearching}
         />
       </div>
     </div>
   );
 };
-
-const SearchIconBox = () => {
-  return (
-    <div className="w-6 h-6">
-      <Image src="/search-normal.png" alt="search" width={24} height={24} />
-    </div>
-  );
-};
-
-export default SearchBox;

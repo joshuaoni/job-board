@@ -51,16 +51,6 @@ export const JobHeader = ({ job, timeAgo }: JobHeaderProps) => {
               <span>•</span>
               <span>{timeAgo}</span>
             </div>
-            {job.company_website && (
-              <a
-                href={job.company_website}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 hover:underline"
-              >
-                Visit Company Website
-              </a>
-            )}
           </div>
         </div>
       </div>

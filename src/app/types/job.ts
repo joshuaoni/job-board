@@ -22,6 +22,7 @@ export interface Job {
 
 export interface TableProps {
   data: Job[];
+  isLoading?: boolean;
 }
 
 export interface TableBodyProps {

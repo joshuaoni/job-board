@@ -1,4 +1,23 @@
-import { QuickInfoCard } from "./QuickInfoCard";
+import { formatJobType } from "@/app/utils/formatters";
+
+interface QuickInfoCardProps {
+  title: string;
+  value: string;
+  className?: string;
+}
+
+const QuickInfoCard = ({
+  title,
+  value,
+  className = "",
+}: QuickInfoCardProps) => {
+  return (
+    <div className={`p-4 rounded-lg ${className}`}>
+      <h3 className="text-sm font-medium text-gray-500 mb-1">{title}</h3>
+      <p className="text-base font-semibold text-gray-900">{value}</p>
+    </div>
+  );
+};
 
 interface QuickInfoProps {
   job: {
@@ -31,7 +50,7 @@ export const QuickInfo = ({ job }: QuickInfoProps) => {
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
       <QuickInfoCard
         title="Job Type"
-        value={job.job_type}
+        value={formatJobType(job.job_type)}
         className="bg-gray-100"
       />
       <QuickInfoCard
