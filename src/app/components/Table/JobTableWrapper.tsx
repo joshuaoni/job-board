@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import useSWR from "swr";
 import { Table } from "./Table";
 import { getJobs } from "@/app/services/jobService";
 import { PaginationContainer } from "../Pagination/Pagination";
@@ -10,29 +10,29 @@ export default function JobTableWrapper({
 }: {
   searchParams: any;
 }) {
-  const [jobs, setJobs] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
   const page = Number(searchParams.page) || 1;
   const pageSize = 10;
 
-  useEffect(() => {
-    const fetchJobs = async () => {
-      setIsLoading(true);
-      const jobsData = await getJobs({
+  // Fetch jobs with SWR
+  const {
+    data: jobs = [],
+    error,
+    isLoading,
+  } = useSWR(
+    ["/api/jobs", searchParams],
+    () =>
+      getJobs({
         search_term: searchParams.search_term || "",
         job_type: searchParams.job_type?.toLowerCase() || "full_time",
         location: searchParams.location?.toLowerCase() || "",
         skills: searchParams.skills
           ? searchParams.skills.split(",").map((s: string) => s.trim())
           : [],
-      });
-      setJobs(jobsData);
-      setIsLoading(false);
-    };
+      }),
+    { revalidateOnFocus: false } // Optional: Prevents re-fetching on tab switch
+  );
 
-    fetchJobs();
-  }, [searchParams]); // Re-fetch when searchParams change
+  if (error) return <p className="text-red-500">Failed to load jobs.</p>;
 
   // Pagination Calculation
   const totalItems = jobs.length;

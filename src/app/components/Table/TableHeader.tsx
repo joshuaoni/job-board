@@ -10,7 +10,7 @@ const TableHeadCell = ({ text }: { text: string }) => {
 
 export const TableHeader = () => {
   return (
-    <div className="w-full h-[39.292px] rounded-[7.76px] pt-[11.65px] pb-[11.65px] bg-[#D6D6D6] gap-4 grid grid-cols-[2fr_1fr_1fr_1fr_1fr] items-center mb-4">
+    <div className="hidden md:grid w-full h-[39.292px] rounded-[7.76px] pt-[11.65px] pb-[11.65px] bg-[#D6D6D6] gap-4 grid-cols-[2fr_1fr_1fr_1fr_1fr] items-center mb-4">
       <TableHeadCell text="Job Title" />
       <TableHeadCell text="Job Type" />
       <TableHeadCell text="Skills" />

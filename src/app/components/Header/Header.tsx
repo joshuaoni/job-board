@@ -3,7 +3,7 @@ import { SearchBox } from "./SearchBox";
 
 export const Header = () => {
   return (
-    <div className="app-header w-full h-[88px] bg-white border-b border-gray-200 mx-auto flex items-center">
+    <div className="app-header w-full bg-white border-b border-gray-200 mx-auto py-4 md:py-0 md:h-[88px] flex items-center">
       <HeaderContainer />
     </div>
   );
@@ -11,7 +11,7 @@ export const Header = () => {
 
 const HeaderContainer = () => {
   return (
-    <div className="w-full h-[48px] flex justify-between mx-auto">
+    <div className="app-header-container w-full flex flex-col md:flex-row md:h-[48px] space-y-4 md:space-y-0 justify-between mx-auto">
       <LeftHeader />
       <RightHeader />
     </div>
@@ -20,7 +20,7 @@ const HeaderContainer = () => {
 
 const LeftHeader = () => {
   return (
-    <div className="app-left-header relative w-[340px] h-[42px]">
+    <div className="app-left-header relative w-full md:w-[340px] h-[42px]">
       <SearchBox />
     </div>
   );
@@ -28,7 +28,7 @@ const LeftHeader = () => {
 
 const RightHeader = () => {
   return (
-    <div className="app-right-header flex items-center space-x-4 bg-[#065844] text-white px-4  rounded-lg">
+    <div className="cursor-pointer app-right-header w-full md:w-auto flex items-center justify-center md:justify-start space-x-4 bg-[#065844] text-white px-4 py-3 md:py-0 rounded-lg">
       <PlusIconBox />
       <CreateJobText />
     </div>
@@ -37,7 +37,7 @@ const RightHeader = () => {
 
 const PlusIconBox = () => {
   return (
-    <div className="w-5 h-5">
+    <div className="w-5 h-5 flex items-center justify-center">
       <Image src="/Icon.png" alt="plus" width={20} height={20} />
     </div>
   );
@@ -58,7 +58,7 @@ export const TitleContainer = () => {
 const TitleText = () => {
   return (
     <div className="h-[35px] flex items-center justify-center">
-      <p className="font-inter font-bold text-[28px] leading-[125%] tracking-[0%] text-black">
+      <p className="font-inter font-bold text-xl md:text-[28px] leading-[125%] tracking-[0%] text-black">
         Job Board
       </p>
     </div>

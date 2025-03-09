@@ -9,7 +9,7 @@ export default function Home({
 }) {
   return (
     <main className="min-h-screen bg-white">
-      <div className="max-w-screen-xl w-full mx-auto px-20">
+      <div className="max-w-screen-xl w-full mx-auto px-4 md:px-20">
         <Header />
         <TitleContainer />
         <Filters />

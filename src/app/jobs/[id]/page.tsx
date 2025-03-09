@@ -22,35 +22,35 @@ const JOB_TYPES = ["full_time", "part_time", "hybrid", "internship"];
 
 const JobDetailsSkeleton = () => (
   <div className="min-h-screen bg-white">
-    <div className="max-w-screen-xl w-full mx-auto px-20 py-8 animate-pulse">
+    <div className="max-w-screen-xl w-full mx-auto px-4 md:px-20 py-4 md:py-8 animate-pulse">
       {/* Back button skeleton */}
-      <div className="w-24 h-8 bg-gray-100 rounded mb-6" />
+      <div className="w-24 h-8 bg-gray-100 rounded mb-4 md:mb-6" />
 
       {/* Header section skeleton */}
-      <div className="bg-[#F9F9F9] rounded-[10px] p-6 mb-8">
-        <div className="flex items-start gap-6">
-          <div className="w-[80px] h-[80px] rounded-full bg-gray-100" />
+      <div className="bg-[#F9F9F9] rounded-[10px] p-4 md:p-6 mb-6 md:mb-8">
+        <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-6">
+          <div className="w-[60px] h-[60px] md:w-[80px] md:h-[80px] rounded-full bg-gray-100" />
           <div className="flex-grow">
-            <div className="w-2/3 h-7 bg-gray-100 rounded mb-4" />
-            <div className="flex items-center gap-4">
-              <div className="w-32 h-5 bg-gray-100 rounded" />
-              <div className="w-1 h-1 bg-gray-100 rounded-full" />
-              <div className="w-24 h-5 bg-gray-100 rounded" />
-              <div className="w-1 h-1 bg-gray-100 rounded-full" />
-              <div className="w-20 h-5 bg-gray-100 rounded" />
+            <div className="w-full md:w-2/3 h-6 md:h-7 bg-gray-100 rounded mb-3 md:mb-4" />
+            <div className="flex flex-wrap items-center gap-2 md:gap-4">
+              <div className="w-24 md:w-32 h-4 md:h-5 bg-gray-100 rounded" />
+              <div className="hidden md:block w-1 h-1 bg-gray-100 rounded-full" />
+              <div className="w-20 md:w-24 h-4 md:h-5 bg-gray-100 rounded" />
+              <div className="hidden md:block w-1 h-1 bg-gray-100 rounded-full" />
+              <div className="w-16 md:w-20 h-4 md:h-5 bg-gray-100 rounded" />
             </div>
           </div>
         </div>
       </div>
 
       {/* Content section skeleton */}
-      <div className="grid grid-cols-1 gap-6">
+      <div className="grid grid-cols-1 gap-4 md:gap-6">
         {/* Quick info cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
           {Array.from({ length: 4 }).map((_, i) => (
-            <div key={i} className="p-4 bg-gray-100 rounded-lg">
-              <div className="w-20 h-4 bg-gray-200 rounded mb-2" />
-              <div className="w-32 h-5 bg-gray-200 rounded" />
+            <div key={i} className="p-3 md:p-4 bg-gray-100 rounded-lg">
+              <div className="w-16 md:w-20 h-3 md:h-4 bg-gray-200 rounded mb-2" />
+              <div className="w-24 md:w-32 h-4 md:h-5 bg-gray-200 rounded" />
             </div>
           ))}
         </div>
@@ -59,9 +59,9 @@ const JobDetailsSkeleton = () => (
         {Array.from({ length: 5 }).map((_, i) => (
           <div
             key={i}
-            className="bg-white rounded-lg p-6 border border-gray-100"
+            className="bg-white rounded-lg p-4 md:p-6 border border-gray-100"
           >
-            <div className="w-40 h-6 bg-gray-100 rounded mb-4" />
+            <div className="w-32 md:w-40 h-5 md:h-6 bg-gray-100 rounded mb-3 md:mb-4" />
             <div className="space-y-2">
               <div className="w-full h-4 bg-gray-100 rounded" />
               <div className="w-5/6 h-4 bg-gray-100 rounded" />
@@ -78,8 +78,8 @@ const ErrorState = () => (
   <div
     className={`min-h-screen bg-white flex items-center justify-center ${animations.fadeIn}`}
   >
-    <div className="text-center">
-      <h1 className="text-2xl font-bold mb-4">Job Not Found</h1>
+    <div className="text-center px-4 md:px-0">
+      <h1 className="text-xl md:text-2xl font-bold mb-4">Job Not Found</h1>
       <Link href="/" className="text-blue-600 hover:underline">
         Back to Jobs
       </Link>
@@ -98,7 +98,6 @@ export default function JobDetails({ params }: JobDetailsProps) {
         setIsLoading(true);
         setError(null);
 
-        // Fetch jobs for each job type
         const jobsPromises = JOB_TYPES.map((type) =>
           getJobs({
             search_term: "",
@@ -154,12 +153,12 @@ export default function JobDetails({ params }: JobDetailsProps) {
 
   return (
     <main className={`min-h-screen bg-white ${animations.fadeIn}`}>
-      <div className="max-w-screen-xl w-full mx-auto px-20 py-8">
+      <div className="max-w-screen-xl w-full mx-auto px-4 md:px-20 py-4 md:py-8">
         <div className={animations.slideUp} style={{ animationDelay: "0.1s" }}>
           <JobHeader job={job} timeAgo={timeAgo} />
         </div>
 
-        <div className="grid grid-cols-1 gap-6">
+        <div className="grid grid-cols-1 gap-4 md:gap-6">
           <div
             className={animations.slideUp}
             style={{ animationDelay: "0.2s" }}
@@ -173,7 +172,7 @@ export default function JobDetails({ params }: JobDetailsProps) {
               style={{ animationDelay: "0.3s" }}
             >
               <Section title="About the Company">
-                <p className="text-gray-700 whitespace-pre-line">
+                <p className="text-gray-700 whitespace-pre-line text-sm md:text-base">
                   {job.company_description}
                 </p>
               </Section>
@@ -185,7 +184,7 @@ export default function JobDetails({ params }: JobDetailsProps) {
             style={{ animationDelay: "0.4s" }}
           >
             <Section title="Job Description">
-              <p className="text-gray-700 whitespace-pre-line">
+              <p className="text-gray-700 whitespace-pre-line text-sm md:text-base">
                 {job.job_description}
               </p>
             </Section>
@@ -200,7 +199,7 @@ export default function JobDetails({ params }: JobDetailsProps) {
                 {job.required_skills.split(",").map((skill: string) => (
                   <span
                     key={skill}
-                    className="px-3 py-1 bg-gray-100 rounded-full text-sm"
+                    className="px-2 md:px-3 py-1 bg-gray-100 rounded-full text-xs md:text-sm"
                   >
                     {skill.trim()}
                   </span>
@@ -215,7 +214,9 @@ export default function JobDetails({ params }: JobDetailsProps) {
               style={{ animationDelay: "0.6s" }}
             >
               <Section title="Educational Requirements">
-                <p className="text-gray-700">{job.educational_requirements}</p>
+                <p className="text-gray-700 text-sm md:text-base">
+                  {job.educational_requirements}
+                </p>
               </Section>
             </div>
           )}
@@ -230,7 +231,7 @@ export default function JobDetails({ params }: JobDetailsProps) {
                   {job.languages.split(",").map((language: string) => (
                     <span
                       key={language}
-                      className="px-3 py-1 bg-gray-100 rounded-full text-sm"
+                      className="px-2 md:px-3 py-1 bg-gray-100 rounded-full text-xs md:text-sm"
                     >
                       {language.trim()}
                     </span>
@@ -246,7 +247,7 @@ export default function JobDetails({ params }: JobDetailsProps) {
               style={{ animationDelay: "0.8s" }}
             >
               <Section title="Additional Benefits">
-                <p className="text-gray-700 whitespace-pre-line">
+                <p className="text-gray-700 whitespace-pre-line text-sm md:text-base">
                   {job.additional_benefits}
                 </p>
               </Section>
@@ -262,7 +263,7 @@ export default function JobDetails({ params }: JobDetailsProps) {
                 {job.tags.split(",").map((tag: string) => (
                   <span
                     key={tag}
-                    className="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm"
+                    className="px-2 md:px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-xs md:text-sm"
                   >
                     {tag.trim()}
                   </span>
@@ -273,12 +274,12 @@ export default function JobDetails({ params }: JobDetailsProps) {
 
           {/* Apply Button Section */}
           <div
-            className={`flex justify-center mt-8 ${animations.slideUp}`}
+            className={`flex flex-col items-center mt-6 md:mt-8 ${animations.slideUp}`}
             style={{ animationDelay: "1s" }}
           >
             <button
               type="button"
-              className="bg-blue-600 text-white px-12 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transform hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-blue-300 shadow-lg hover:shadow-xl"
+              className="w-full md:w-auto bg-blue-600 text-white px-8 md:px-12 py-3 md:py-4 rounded-lg text-base md:text-lg font-semibold hover:bg-blue-700 transform hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-blue-300 shadow-lg hover:shadow-xl"
             >
               Apply for this position
             </button>
